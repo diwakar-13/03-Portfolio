@@ -213,7 +213,7 @@ const Contact = () => {
             value={formData.message}
             onChange={handleChange}
             placeholder="Your Message"
-            className="bg-[#111] rounded-lg px-4 py-3 outline-none"
+            className="bg-[#111] resize-none rounded-lg px-4 py-3 outline-none"
           />
 
           <div className="flex justify-center">
