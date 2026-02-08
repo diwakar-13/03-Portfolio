@@ -16,7 +16,6 @@ const Projects = () => {
         );
 
         // 🔥 IMPORTANT: your backend sends { data: [...] }
-        console.log(res.data.data);
         setProjects(res.data.data);
       } catch (error) {
         console.log("Failed to fetch projects", error);

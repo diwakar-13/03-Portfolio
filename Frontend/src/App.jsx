@@ -16,11 +16,7 @@ const App = () => {
       <Navbar />
 
       {/* 🔥 Toast container (ONE TIME only) */}
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        theme="dark"
-      />
+      <ToastContainer position="top-right" autoClose={3000} theme="dark" />
 
       <Routes>
         <Route
