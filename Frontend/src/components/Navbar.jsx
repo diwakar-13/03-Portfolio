@@ -1,36 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-const MotionLink = motion(Link);
+const MotionA = motion.a;
 
 const navContainer = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.2 } },
+  show: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const navItem = {
   hidden: { y: 30, opacity: 0 },
-  show: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div
-      className={`flex justify-between items-center fixed top-0 left-0 right-0 z-50 text-[#ededed] p-6 bg-[#111] `}
-    >
+    <div className="flex justify-between items-center fixed top-0 left-0 right-0 z-50 text-[#ededed] p-6 bg-[#111]">
+      {/* Logo */}
       <motion.div
         initial={{ opacity: 0, x: -80 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-3xl tracking-wide font-bold"
       >
-        <Link to="/">Portfolio</Link>
+        <a href="#home">Portfolio</a>
       </motion.div>
 
+      {/* Mobile Menu Button */}
       <button
         onClick={() => setOpen(!open)}
         className="md:hidden text-2xl cursor-pointer"
@@ -39,6 +46,7 @@ const Navbar = () => {
         <GiHamburgerMenu />
       </button>
 
+      {/* Nav Links */}
       <motion.div
         variants={navContainer}
         initial="hidden"
@@ -48,7 +56,7 @@ const Navbar = () => {
           md:flex
           flex-col md:flex-row
           absolute md:static
-          top-16 right-6 md:top-auto md:right-auto
+          top-16 right-6
           bg-[#111] md:bg-transparent
           p-4 md:p-0
           gap-4 md:gap-6
@@ -57,37 +65,25 @@ const Navbar = () => {
           rounded-lg md:rounded-none
         `}
       >
-        <MotionLink to="/" variants={navItem} onClick={() => setOpen(false)}>
+        <MotionA href="#home" variants={navItem} onClick={() => setOpen(false)}>
           Home
-        </MotionLink>
-        <MotionLink
-          to="/about"
-          variants={navItem}
-          onClick={() => setOpen(false)}
-        >
+        </MotionA>
+
+        <MotionA href="#about" variants={navItem} onClick={() => setOpen(false)}>
           About
-        </MotionLink>
-        <MotionLink
-          to="/skill"
-          variants={navItem}
-          onClick={() => setOpen(false)}
-        >
+        </MotionA>
+
+        <MotionA href="#skills" variants={navItem} onClick={() => setOpen(false)}>
           Skills
-        </MotionLink>
-        <MotionLink
-          to="/project"
-          variants={navItem}
-          onClick={() => setOpen(false)}
-        >
+        </MotionA>
+
+        <MotionA href="#projects" variants={navItem} onClick={() => setOpen(false)}>
           Projects
-        </MotionLink>
-        <MotionLink
-          to="/contact"
-          variants={navItem}
-          onClick={() => setOpen(false)}
-        >
+        </MotionA>
+
+        <MotionA href="#contact" variants={navItem} onClick={() => setOpen(false)}>
           Contact
-        </MotionLink>
+        </MotionA>
       </motion.div>
     </div>
   );

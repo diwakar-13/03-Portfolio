@@ -1,18 +1,72 @@
-import React from "react";
+import { useState } from "react";
 import { IoCall, IoMail } from "react-icons/io5";
 import { FaFacebook, FaLinkedinIn } from "react-icons/fa6";
 import { FaInstagram, FaGithub } from "react-icons/fa";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    fullname: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (loading) return; // 🔒 block multiple clicks
+    setLoading(true);
+
+    const toastId = toast.loading("Sending message...");
+
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/contact/send/message`,
+        formData,
+      );
+
+      toast.update(toastId, {
+        render: "Message sent successfully 📩",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+
+      setFormData({
+        fullname: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      toast.update(toastId, {
+        render: "Failed to send message ❌",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    } finally {
+      setLoading(false); // 🔓 enable again
+    }
+  };
+
   return (
-    // 🔴 CHANGE 1: responsive flex (column on mobile, row on large)
     <div
       id="contact"
       className="min-h-screen flex flex-col lg:flex-row items-center gap-14 px-4 sm:px-8 lg:px-24"
     >
-      {/* ================= LEFT SIDE ================= */}
-      {/* 🔴 CHANGE 2: width responsive */}
+      {/* LEFT SIDE */}
       <motion.div
         initial={{ x: -60, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
@@ -33,9 +87,7 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* CONTACT INFO */}
         <div className="flex flex-col gap-5">
-          {/* Phone */}
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 flex items-center justify-center bg-[#111] rounded-xl border-2 border-[#30BCED]">
               <IoCall size={28} />
@@ -48,7 +100,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Email */}
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 flex items-center justify-center bg-[#111] rounded-xl border-2 border-[#30BCED]">
               <IoMail size={28} />
@@ -61,7 +112,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* SOCIAL ICONS */}
           <div className="flex gap-4 justify-center lg:justify-start pt-4">
             {[
               {
@@ -85,7 +135,6 @@ const Contact = () => {
                 rel="noopener noreferrer"
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
-
                 whileHover={{
                   scale: 1.2,
                   rotate: 6,
@@ -99,8 +148,8 @@ const Contact = () => {
                 }}
                 viewport={{ once: true }}
                 className="border-2 border-[#30BCED] rounded-full p-3
-                 hover:bg-[#ededed] hover:text-black
-                 transition duration-100 hover:border-none"
+                  hover:bg-[#ededed] hover:text-black
+                  transition duration-100 hover:border-none"
               >
                 <item.icon size={20} />
               </motion.a>
@@ -109,70 +158,73 @@ const Contact = () => {
         </div>
       </motion.div>
 
-      {/* ================= RIGHT SIDE (FORM) ================= */}
+      {/* FORM */}
       <motion.div
         initial={{ x: 60, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        // 🔴 CHANGE 3: width responsive + background sync
-        className="w-full lg:w-1/2 bg-[#000] rounded-2xl p-8
+        className="w-full lg:w-1/2 lg:mb-0 mb-10 bg-[#000] rounded-2xl p-8
                    shadow-[0_0_20px_#ededed]"
       >
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-8">
           Contact <span className="text-[#30BCED]">Me!</span>
         </h2>
 
-        <form className="flex flex-col gap-6">
-          {/* ROW 1 */}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div className="flex flex-col sm:flex-row gap-6">
             <input
-              type="text"
+              name="fullname"
+              value={formData.fullname}
+              onChange={handleChange}
               placeholder="Full Name"
-              className="flex-1 bg-[#111] rounded-lg px-4 py-3 outline-none
-                         border border-transparent focus:border-[#30BCED]"
+              className="flex-1 bg-[#111] rounded-lg px-4 py-3 outline-none"
             />
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Email address"
-              className="flex-1 bg-[#111] rounded-lg px-4 py-3 outline-none
-                         border border-transparent focus:border-[#30BCED]"
+              className="flex-1 bg-[#111] rounded-lg px-4 py-3 outline-none"
             />
           </div>
 
-          {/* ROW 2 */}
           <div className="flex flex-col sm:flex-row gap-6">
             <input
-              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
               placeholder="Phone Number"
-              className="flex-1 bg-[#111] rounded-lg px-4 py-3 outline-none
-                         border border-transparent focus:border-[#30BCED]"
+              className="flex-1 bg-[#111] rounded-lg px-4 py-3 outline-none"
             />
             <input
-              type="text"
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
               placeholder="Email Subject"
-              className="flex-1 bg-[#111] rounded-lg px-4 py-3 outline-none
-                         border border-transparent focus:border-[#30BCED]"
+              className="flex-1 bg-[#111] rounded-lg px-4 py-3 outline-none"
             />
           </div>
 
-          {/* MESSAGE */}
           <textarea
             rows="5"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
             placeholder="Your Message"
-            className="bg-[#111] rounded-lg px-4 py-3 outline-none
-                       border border-[#30BCED] resize-none
-                       focus:shadow-[0_0_15px_#30BCED]"
+            className="bg-[#111] rounded-lg px-4 py-3 outline-none"
           />
 
-          {/* BUTTON */}
           <div className="flex justify-center">
             <button
               type="submit"
+              disabled={loading}
               className="px-10 py-3 rounded-full bg-white text-black font-semibold
-                         hover:shadow-[0_0_25px_#ffffff] transition cursor-pointer"
+                         hover:shadow-[0_0_25px_#ffffff] transition
+                         disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </button>
           </div>
         </form>

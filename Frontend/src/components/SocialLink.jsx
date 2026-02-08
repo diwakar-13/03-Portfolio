@@ -2,63 +2,51 @@ import { motion } from "framer-motion";
 import { FaInstagram, FaGithub } from "react-icons/fa";
 import { FaFacebook, FaLinkedinIn } from "react-icons/fa6";
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const item = {
-  hidden: { y: 30, opacity: 0 },
-  show: {
-    y: 0,
-    opacity: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
-
 const SocialLink = () => {
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className="flex gap-4 justify-center lg:justify-start"
-    >
+    <div className="flex gap-4 justify-center lg:justify-start pt-4">
       {[
-        { Icon: FaInstagram, link: "#" },
-        { Icon: FaFacebook, link: "#" },
-        { Icon: FaGithub, link: "#" },
-        { Icon: FaLinkedinIn, link: "#" },
-      ].map(({ Icon, link }, index) => (
+        {
+          icon: FaInstagram,
+          link: "https://www.instagram.com/diwakar__007?igsh=NzltYTAxaHNkc2xu",
+        },
+        {
+          icon: FaFacebook,
+          link: "https://www.facebook.com/share/1GAtirjFb7/",
+        },
+        { icon: FaGithub, link: "https://github.com/diwakar-13" },
+        {
+          icon: FaLinkedinIn,
+          link: "https://www.linkedin.com/in/diwakar-pandey-87530b325",
+        },
+      ].map((item, index) => (
         <motion.a
           key={index}
-          variants={item}
-          href={link}
+          href={item.link}
           target="_blank"
           rel="noopener noreferrer"
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
           whileHover={{
-            scale: 1.15,
-            y: -4,
-            boxShadow: "0 0 20px #ededed, 0 0 40px #ededed",
+            scale: 1.2,
+            rotate: 6,
+            boxShadow: "0 0 20px #30BCED",
           }}
           whileTap={{ scale: 0.9 }}
-          className="
-            inline-flex items-center justify-center
-            border-2 border-gray-400
-            rounded-full p-2
-            text-gray-300
-            transition-all duration-100
-            hover:border-none
-            hover:text-[#000]
-            hover:bg-[#ededed]
-          "
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            delay: index * 0.1,
+          }}
+          viewport={{ once: true }}
+          className="border-2 border-[#30BCED] rounded-full p-3
+                  hover:bg-[#ededed] hover:text-black
+                  transition duration-100 hover:border-none"
         >
-          <Icon size={28} />
+          <item.icon size={20} />
         </motion.a>
       ))}
-    </motion.div>
+    </div>
   );
 };
 

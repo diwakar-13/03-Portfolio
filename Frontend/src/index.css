@@ -1,6 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=McLaren&family=Poppins:wght@400;500&display=swap");
 @import "tailwindcss";
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar (but keep scroll) */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
 body {
   font-family: "McLaren", sans-serif;
+  -ms-overflow-style: none; /* IE */
 }

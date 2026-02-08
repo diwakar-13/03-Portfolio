@@ -27,6 +27,7 @@ const Profile = () => {
       variants={container}
       initial="hidden"
       animate="show"
+    
       className="flex flex-col gap-3"
     >
       <motion.h3

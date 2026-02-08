@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const Image = () => {
   return (
-    <div className="w-full lg:w-1/2 flex justify-center">
+    <div className="w-full lg:w-1/3 flex justify-center">
       <motion.div
         initial={{ x: 80, opacity: 0 }}
         animate={{
