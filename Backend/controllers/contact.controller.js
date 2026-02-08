@@ -9,8 +9,8 @@ export const sendMessage = async (req, res) => {
     // 1️⃣ save to DB (backup)
     await Contact.create(data);
 
-    // 2️⃣ send email to YOU
-    await sendEmail(data);
+    // 2️⃣ send email (NON-BLOCKING)
+    sendEmail(data); // ❌ removed await
 
     res.status(200).json({ message: "Message sent successfully" });
   } catch (error) {
