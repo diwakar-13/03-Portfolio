@@ -34,7 +34,7 @@ const Home = () => {
               className="inline-flex items-center justify-center
                 bg-[#ededed] text-black px-8 py-3
                 rounded-full font-semibold text-xl
-                shadow-[0_0_5px_#E0E1DD,0_0_25px_#E0E1DD]"
+                shadow-[0_0_5px_#E0E1DD,0_0_25px_#E0E1DD] cursor-pointer"
             >
               Download resume
             </motion.button>
@@ -48,6 +48,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-

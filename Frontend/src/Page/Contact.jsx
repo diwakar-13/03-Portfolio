@@ -221,7 +221,7 @@ const Contact = () => {
               type="submit"
               disabled={loading}
               className="px-10 py-3 rounded-full bg-white text-black font-semibold
-                         hover:shadow-[0_0_25px_#ffffff] transition
+                         hover:shadow-[0_0_25px_#ffffff] transition cursor-pointer
                          disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Sending..." : "Send Message"}
