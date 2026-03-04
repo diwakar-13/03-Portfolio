@@ -32,10 +32,10 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen text-white
+      className=" text-white
                  flex items-center px-4 sm:px-8 lg:px-20 scroll-mt-10"
     >
-      <div className="w-full max-w-7xl ">
+      <div className="w-full lg:max-w-7xl xl:max-w-full mx-auto ">
         {/* HEADING */}
         <motion.h2
           initial={{ y: 30, opacity: 0 }}
@@ -127,7 +127,6 @@ const Projects = () => {
               className="w-full lg:w-[500px] lg:h-[400px]
                          rounded-2xl overflow-hidden
                          bg-[#e5e5e5]
-                         md:shadow-[0_0_30px_#ededed]
                          hover:scale-105 duration-200 transition-all"
             >
               <img

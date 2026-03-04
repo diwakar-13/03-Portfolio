@@ -64,7 +64,7 @@ const Contact = () => {
   return (
     <div
       id="contact"
-      className="min-h-screen flex flex-col lg:flex-row items-center gap-14 px-4 sm:px-8 lg:px-24"
+      className="lg:min-h-screen md:mt-10 lg:mt-0 w-full flex flex-col lg:flex-row items-center gap-14 px-4 sm:px-8 lg:px-24"
     >
       {/* LEFT SIDE */}
       <motion.div

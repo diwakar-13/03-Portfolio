@@ -18,6 +18,8 @@ const skillsData = [
       { name: "React", icon: <FaReact /> },
       { name: "JavaScript", icon: <SiJavascript /> },
       { name: "Tailwind CSS", icon: <SiTailwindcss /> },
+     
+      
     ],
   },
   {
@@ -50,7 +52,7 @@ const Skills = () => {
   return (
     <div
       id="skills"
-      className=" min-h-screen w-full flex items-center px-4 sm:px-8 lg:px-24"
+      className=" lg:min-h-screen md:mt-10 lg:mt-0 w-full flex items-center px-4 sm:px-8 lg:px-24"
     >
       <div className="w-full  mx-auto">
         {/* Heading */}

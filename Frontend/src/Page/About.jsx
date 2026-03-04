@@ -17,7 +17,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-screen flex items-center
+      className="lg:min-h-screen mt-10 lg:mt-0 flex items-center
                  px-4 sm:px-6 md:px-10
                  bg-black text-white"
     >
@@ -28,7 +28,7 @@ const About = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="w-full md:w-1/3 flex justify-center"
+          className="w-full md:w-1/2 lg:w-1/3 flex justify-center"
         >
           <motion.div
             animate={{

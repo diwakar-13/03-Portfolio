@@ -22,7 +22,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <div className="min-h-screen bg-[#000] text-[#ededed] flex flex-col gap-32 sm:gap-24">
+            <div className="min-h-screen overflow-x-hidden  bg-[#000] text-[#ededed] flex flex-col gap-32 sm:gap-24">
               <Home />
               <About />
               <Skills />
