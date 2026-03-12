@@ -13,4 +13,8 @@ app.use(express.json());
 app.use("/project", projectRouter);
 app.use("/contact", contactRouter);
 
+app.get("/", (req, res) => {
+  res.send("Server running");
+});
+
 export default app;
