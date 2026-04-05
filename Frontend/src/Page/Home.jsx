@@ -5,7 +5,16 @@ import { motion } from "framer-motion";
 
 const Home = () => {
   const handleResumeClick = () => {
-    alert("Resume will be available soon");
+    // 1️⃣ Open in new tab
+    window.open("/resume.pdf", "_blank");
+
+    // 2️⃣ Trigger download
+    const link = document.createElement("a");
+    link.href = "/resume.pdf";
+    link.download = "Diwakar-Pandey-Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
